@@ -22,11 +22,14 @@ export default function RootLayout({
         
         {/* Navbar menggunakan warna Pink Pudar dengan logo Pink Tua */}
         <nav className="bg-diary-200 shadow-sm p-4 mb-6">
-          <div className="max-w-4xl mx-auto flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold text-diary-400">
+          {/* Di sini perubahannya: flex-col untuk HP, md:flex-row untuk Laptop, dan diberi gap */}
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            <Link href="/" className="text-xl md:text-2xl font-bold text-diary-400 shrink-0">
               J & J Diary ❤️
             </Link>
-            <div className="flex gap-4 text-sm font-medium">
+            
+            {/* Navigasi dibungkus dengan flex-wrap agar kalau layarnya sangat kecil, teksnya tidak keluar jalur */}
+            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium">
               <Link href="/diary" className="hover:text-diary-400 transition-colors">Diary</Link>
               <Link href="/bible-study" className="hover:text-diary-400 transition-colors">Alkitab</Link>
               <Link href="/books" className="hover:text-diary-400 transition-colors">Buku</Link>
