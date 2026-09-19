@@ -15,7 +15,6 @@ export default function TimelinePage() {
 
   const fetchEvents = async () => {
     try {
-      // Mengurutkan berdasarkan tanggal acara (eventDate), bukan tanggal pembuatan
       const q = query(collection(db, 'timeline_events'), orderBy('eventDate', 'desc'));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => ({
@@ -42,11 +41,11 @@ export default function TimelinePage() {
     setIsSubmitting(true);
     try {
       await addDoc(collection(db, 'timeline_events'), {
-        eventDate: date, // Menyimpan string tanggal (YYYY-MM-DD)
+        eventDate: date, 
         title: title,
         description: description,
         author: author,
-        createdAt: new Date() // Menyimpan waktu pencatatan
+        createdAt: new Date()
       });
       
       setDate('');
@@ -63,30 +62,29 @@ export default function TimelinePage() {
     }
   };
 
-  // Fungsi utilitas untuk memformat tanggal YYYY-MM-DD menjadi lebih mudah dibaca
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
     return new Date(dateString).toLocaleDateString('id-ID', options);
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 space-y-8">
+    <div className="max-w-2xl mx-auto py-6 md:py-8 space-y-6 md:space-y-8 px-4 md:px-0">
       
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-slate-800">Timeline Dating 🗓️</h1>
-        <Link href="/" className="text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors">
+      <div className="flex items-start md:items-center justify-between gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">Timeline Dating 🗓️</h1>
+        <Link href="/" className="shrink-0 text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors mt-1 md:mt-0">
           &larr; Kembali
         </Link>
       </div>
 
-      <div className="bg-white p-6 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
+      <div className="bg-white p-5 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
         
         <div className="space-y-3">
           <label className="text-sm font-medium text-slate-600">Siapa yang menambahkan momen ini?</label>
-          <div className="flex gap-4">
+          <div className="flex gap-3 md:gap-4">
             <button
               onClick={() => setAuthor('Jason')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jason' 
                   ? 'border-blue-300 bg-blue-50 text-blue-500 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -95,7 +93,7 @@ export default function TimelinePage() {
             </button>
             <button
               onClick={() => setAuthor('Jessica')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jessica' 
                   ? 'border-diary-300 bg-diary-50 text-diary-400 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -114,7 +112,7 @@ export default function TimelinePage() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+              className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
             />
           </div>
           
@@ -124,7 +122,7 @@ export default function TimelinePage() {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+              className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
               placeholder="Misal: Nonton Konser Bareng"
             />
           </div>
@@ -137,7 +135,7 @@ export default function TimelinePage() {
           <textarea 
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[120px] resize-none text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+            className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[120px] md:min-h-[140px] resize-none text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
             placeholder="Kesan hari itu..."
           ></textarea>
         </div>
@@ -145,7 +143,7 @@ export default function TimelinePage() {
         <button 
           onClick={handleSaveEvent}
           disabled={isSubmitting}
-          className={`w-full py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-lg
+          className={`w-full py-3 md:py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-base md:text-lg
             ${isSubmitting ? 'bg-slate-400 cursor-not-allowed' : 'bg-diary-400 hover:bg-[#f97ebf]'}
           `}
         >
@@ -154,7 +152,7 @@ export default function TimelinePage() {
       </div>
 
       <div className="space-y-0 pt-6 mt-4 relative">
-        <h3 className="text-lg font-semibold text-slate-700 mb-6">Perjalanan Kita</h3>
+        <h3 className="text-lg md:text-xl font-semibold text-slate-700 mb-6">Perjalanan Kita</h3>
         
         {/* Garis Vertikal untuk Timeline */}
         <div className="absolute left-[27px] top-[70px] bottom-0 w-[2px] bg-diary-200 z-0 hidden md:block"></div>
@@ -162,9 +160,9 @@ export default function TimelinePage() {
         {events.length === 0 ? (
           <p className="text-slate-500 text-sm italic">Belum ada momen yang tercatat.</p>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {events.map((event) => (
-              <div key={event.id} className="relative flex flex-col md:flex-row md:items-start gap-4 md:gap-8 z-10">
+              <div key={event.id} className="relative flex flex-col md:flex-row md:items-start gap-3 md:gap-8 z-10">
                 
                 {/* Indikator Titik (Desktop) */}
                 <div className="hidden md:flex items-center justify-center w-14 h-14 bg-diary-100 rounded-full border-4 border-white shadow-sm shrink-0 mt-1">
@@ -172,16 +170,16 @@ export default function TimelinePage() {
                 </div>
 
                 {/* Konten Kartu */}
-                <div className="flex-1 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-1">
-                    <h4 className="text-xl font-bold text-slate-800">{event.title}</h4>
-                    <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-sm font-semibold rounded-full w-max">
+                <div className="flex-1 p-4 md:p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
+                    <h4 className="text-lg md:text-xl font-bold text-slate-800 leading-tight">{event.title}</h4>
+                    <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs md:text-sm font-semibold rounded-full w-max">
                       {formatDate(event.eventDate)}
                     </span>
                   </div>
                   
                   {event.description && (
-                    <p className="text-slate-600 leading-relaxed whitespace-pre-wrap mt-2">
+                    <p className="text-slate-600 leading-relaxed whitespace-pre-wrap mt-2 text-sm md:text-base">
                       {event.description}
                     </p>
                   )}

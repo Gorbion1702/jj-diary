@@ -7,9 +7,9 @@ import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore'
 
 export default function BooksPage() {
   const [bookTitle, setBookTitle] = useState('');
-  const [bookAuthorName, setBookAuthorName] = useState(''); // Nama pengarang buku
+  const [bookAuthorName, setBookAuthorName] = useState(''); 
   const [review, setReview] = useState('');
-  const [author, setAuthor] = useState<'Jason' | 'Jessica'>('Jason'); // Siapa yang mereview
+  const [author, setAuthor] = useState<'Jason' | 'Jessica'>('Jason'); 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [books, setBooks] = useState<any[]>([]);
 
@@ -63,23 +63,23 @@ export default function BooksPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 space-y-8">
+    <div className="max-w-2xl mx-auto py-6 md:py-8 space-y-6 md:space-y-8 px-4 md:px-0">
       
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-slate-800">Diskusi Buku 📚</h1>
-        <Link href="/" className="text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors">
+      <div className="flex items-start md:items-center justify-between gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">Diskusi Buku 📚</h1>
+        <Link href="/" className="shrink-0 text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors mt-1 md:mt-0">
           &larr; Kembali
         </Link>
       </div>
 
-      <div className="bg-white p-6 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
+      <div className="bg-white p-5 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
         
         <div className="space-y-3">
           <label className="text-sm font-medium text-slate-600">Siapa yang membaca buku ini?</label>
-          <div className="flex gap-4">
+          <div className="flex gap-3 md:gap-4">
             <button
               onClick={() => setAuthor('Jason')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jason' 
                   ? 'border-blue-300 bg-blue-50 text-blue-500 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -88,7 +88,7 @@ export default function BooksPage() {
             </button>
             <button
               onClick={() => setAuthor('Jessica')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jessica' 
                   ? 'border-diary-300 bg-diary-50 text-diary-400 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -107,7 +107,7 @@ export default function BooksPage() {
               type="text"
               value={bookTitle}
               onChange={(e) => setBookTitle(e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+              className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
               placeholder="Misal: Atomic Habits"
             />
           </div>
@@ -118,7 +118,7 @@ export default function BooksPage() {
               type="text"
               value={bookAuthorName}
               onChange={(e) => setBookAuthorName(e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+              className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
               placeholder="Misal: James Clear"
             />
           </div>
@@ -131,7 +131,7 @@ export default function BooksPage() {
           <textarea 
             value={review}
             onChange={(e) => setReview(e.target.value)}
-            className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[160px] resize-none text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+            className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[140px] md:min-h-[160px] resize-none text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
             placeholder="Buku ini menarik karena..."
           ></textarea>
         </div>
@@ -139,7 +139,7 @@ export default function BooksPage() {
         <button 
           onClick={handleSaveBook}
           disabled={isSubmitting}
-          className={`w-full py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-lg
+          className={`w-full py-3 md:py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-base md:text-lg
             ${isSubmitting ? 'bg-slate-400 cursor-not-allowed' : 'bg-diary-400 hover:bg-[#f97ebf]'}
           `}
         >
@@ -148,26 +148,26 @@ export default function BooksPage() {
       </div>
 
       <div className="space-y-4 pt-6 border-t-2 border-slate-100">
-        <h3 className="text-lg font-semibold text-slate-700">Daftar Buku yang Dibaca</h3>
+        <h3 className="text-lg md:text-xl font-semibold text-slate-700">Daftar Buku yang Dibaca</h3>
         
         {books.length === 0 ? (
           <p className="text-slate-500 text-sm italic">Belum ada buku yang dibahas.</p>
         ) : (
           books.map((book) => (
-            <div key={book.id} className="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <div key={book.id} className="p-4 md:p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-2">
                 <div>
-                  <h4 className="text-xl font-bold text-slate-800">{book.title}</h4>
+                  <h4 className="text-lg md:text-xl font-bold text-slate-800 leading-tight">{book.title}</h4>
                   {book.bookAuthor && (
-                    <p className="text-sm font-medium text-slate-500">Oleh: {book.bookAuthor}</p>
+                    <p className="text-xs md:text-sm font-medium text-slate-500 mt-1">Oleh: {book.bookAuthor}</p>
                   )}
                 </div>
-                <span className="text-xs font-medium text-slate-400">
+                <span className="text-xs font-medium text-slate-400 shrink-0">
                   {book.createdAt?.toDate ? book.createdAt.toDate().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Baru saja'}
                 </span>
               </div>
               
-              <div className="bg-slate-50 p-4 rounded-xl mt-4">
+              <div className="bg-slate-50 p-3 md:p-4 rounded-xl mt-4">
                 <p className="text-slate-600 leading-relaxed whitespace-pre-wrap text-sm md:text-base">
                   "{book.review}"
                 </p>

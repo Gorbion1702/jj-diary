@@ -14,7 +14,6 @@ export default function BibleStudyPage() {
 
   const fetchStudies = async () => {
     try {
-      // Kita menggunakan koleksi baru bernama 'bible_studies'
       const q = query(collection(db, 'bible_studies'), orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => ({
@@ -61,23 +60,23 @@ export default function BibleStudyPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 space-y-8">
+    <div className="max-w-2xl mx-auto py-6 md:py-8 space-y-6 md:space-y-8 px-4 md:px-0">
       
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-slate-800">Pendalaman Alkitab ✝️</h1>
-        <Link href="/" className="text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors">
+      <div className="flex items-start md:items-center justify-between gap-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">Pendalaman Alkitab ✝️</h1>
+        <Link href="/" className="shrink-0 text-sm font-medium text-diary-400 hover:text-pink-500 transition-colors mt-1 md:mt-0">
           &larr; Kembali
         </Link>
       </div>
 
-      <div className="bg-white p-6 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
+      <div className="bg-white p-5 md:p-8 rounded-2xl border-2 border-diary-200 shadow-sm space-y-6">
         
         <div className="space-y-3">
           <label className="text-sm font-medium text-slate-600">Siapa yang membagikan renungan?</label>
-          <div className="flex gap-4">
+          <div className="flex gap-3 md:gap-4">
             <button
               onClick={() => setAuthor('Jason')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jason' 
                   ? 'border-blue-300 bg-blue-50 text-blue-500 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -86,7 +85,7 @@ export default function BibleStudyPage() {
             </button>
             <button
               onClick={() => setAuthor('Jessica')}
-              className={`flex-1 py-3 rounded-xl font-bold transition-all border-2 outline-none
+              className={`flex-1 py-2.5 md:py-3 rounded-xl font-bold transition-all border-2 outline-none text-sm md:text-base
                 ${author === 'Jessica' 
                   ? 'border-diary-300 bg-diary-50 text-diary-400 shadow-sm' 
                   : 'border-slate-100 text-slate-400 hover:bg-slate-50'}`}
@@ -106,7 +105,7 @@ export default function BibleStudyPage() {
             type="text"
             value={verse}
             onChange={(e) => setVerse(e.target.value)}
-            className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+            className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
             placeholder="Tulis kitab, pasal, dan ayat..."
           />
         </div>
@@ -118,7 +117,7 @@ export default function BibleStudyPage() {
           <textarea 
             value={reflection}
             onChange={(e) => setReflection(e.target.value)}
-            className="w-full p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[160px] resize-none text-slate-700 bg-slate-50 focus:bg-white transition-colors"
+            className="w-full p-3 md:p-4 rounded-xl border-2 border-diary-100 focus:outline-none focus:border-diary-300 focus:ring-0 min-h-[140px] md:min-h-[160px] resize-none text-sm md:text-base text-slate-700 bg-slate-50 focus:bg-white transition-colors"
             placeholder="Hari ini aku belajar bahwa..."
           ></textarea>
         </div>
@@ -126,7 +125,7 @@ export default function BibleStudyPage() {
         <button 
           onClick={handleSaveStudy}
           disabled={isSubmitting}
-          className={`w-full py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-lg
+          className={`w-full py-3 md:py-3.5 text-white font-bold rounded-xl transition-colors shadow-sm text-base md:text-lg
             ${isSubmitting ? 'bg-slate-400 cursor-not-allowed' : 'bg-diary-400 hover:bg-[#f97ebf]'}
           `}
         >
@@ -135,23 +134,23 @@ export default function BibleStudyPage() {
       </div>
 
       <div className="space-y-4 pt-6 border-t-2 border-slate-100">
-        <h3 className="text-lg font-semibold text-slate-700">Diskusi Sebelumnya</h3>
+        <h3 className="text-lg md:text-xl font-semibold text-slate-700">Diskusi Sebelumnya</h3>
         
         {studies.length === 0 ? (
           <p className="text-slate-500 text-sm italic">Belum ada renungan. Mari mulai bertumbuh bersama!</p>
         ) : (
           studies.map((study) => (
-            <div key={study.id} className="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <div key={study.id} className="p-4 md:p-5 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h4 className="text-lg font-bold text-diary-400">{study.verse}</h4>
-                  <span className="text-xs font-medium text-slate-400">
+                  <h4 className="text-lg font-bold text-diary-400 leading-tight">{study.verse}</h4>
+                  <span className="text-xs font-medium text-slate-400 block mt-1">
                     {study.createdAt?.toDate ? study.createdAt.toDate().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Baru saja'}
                   </span>
                 </div>
               </div>
               
-              <p className="text-slate-600 leading-relaxed whitespace-pre-wrap mt-2">
+              <p className="text-slate-600 leading-relaxed whitespace-pre-wrap mt-3 text-sm md:text-base">
                 {study.reflection}
               </p>
               
