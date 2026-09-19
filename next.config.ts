@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Mengizinkan akses dari HP/IP Lokal
+  allowedDevOrigins: ['192.168.18.63', 'localhost'],
 };
 
 export default nextConfig;
