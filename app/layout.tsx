@@ -34,6 +34,7 @@ export default function RootLayout({
               <Link href="/bible-study" className="hover:text-diary-400 transition-colors">Alkitab</Link>
               <Link href="/books" className="hover:text-diary-400 transition-colors">Buku</Link>
               <Link href="/timeline" className="hover:text-diary-400 transition-colors">Timeline</Link>
+              <Link href="/gallery" className="hover:text-diary-400 transition-colors">Galeri</Link>
             </div>
           </div>
         </nav>

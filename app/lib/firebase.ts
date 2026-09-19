@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-// import { getAuth } from "firebase/auth"; // Aktifkan jika nanti butuh fitur login
+import { getStorage } from "firebase/storage"; // <-- Tambahan untuk Storage
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,9 +11,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Inisialisasi Firebase (mencegah inisialisasi ganda saat hot-reloading di Next.js)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Inisialisasi layanan Firestore
 export const db = getFirestore(app);
-// export const auth = getAuth(app); // Aktifkan jika butuh login
+export const storage = getStorage(app); // <-- Ekspor layanan Storage

@@ -38,6 +38,16 @@ export default function Home() {
           <p className="text-sm text-slate-500">Rencana pertemuan kita selanjutnya.</p>
         </Link>
 
+        <Link href="/gallery" className="group block bg-white p-6 md:p-8 rounded-3xl border-2 border-diary-100 hover:border-diary-400 hover:shadow-lg transition-all">
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-3xl md:text-4xl bg-diary-50 p-3 rounded-2xl group-hover:scale-110 transition-transform">📸</span>
+            <h2 className="text-xl md:text-2xl font-bold text-slate-700 group-hover:text-diary-400 transition-colors">Galeri Foto</h2>
+          </div>
+          <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+            Kumpulan foto momen manis kita berdua.
+          </p>
+        </Link>
+
       </div>
     </div>
   );
