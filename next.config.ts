@@ -1,8 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  // Mengizinkan akses dari HP/IP Lokal
-  allowedDevOrigins: ['192.168.18.63', 'localhost'],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
